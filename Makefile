@@ -6,7 +6,11 @@
 ##
 
 MAIN = src/main.c
-OBJ = $(notdir $(MAIN:.c=.o))
+SRC = 	src/options.c
+OBJ = $(notdir $(MAIN:.c=.o)) $(notdir $(SRC:.c=.o))
+
+TESTS =	tests/test_options.c
+TOBJ = $(notdir $(TESTS:.c=.o)) $(notdir $(SRC:.c=.o))
 
 I_PATH = include/
 FLAGS = -Wall -Wextra
@@ -19,7 +23,7 @@ $(NAME) : $(OBJ)
 	gcc -o $(NAME) $(OBJ) $(FLAGS)
 
 $(OBJ):
-	gcc -c $(MAIN) -I$(INCLUDE) $(FLAGS)
+	gcc -c $(MAIN) $(SRC) -I$(I_PATH) $(FLAGS)
 
 clean:
 	rm -f $(OBJ)
@@ -28,5 +32,11 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+tests_run:
+	gcc -c $(TESTS) $(SRC) -I$(I_PATH) $(FLAGS) --coverage
+	gcc -o unit_test $(TOBJ) $(FLAGS) --coverage -lcriterion
+	./unit_test
+	rm -f unit_test $(TOBJ)
 
 .PHONY: all clean fclean re
