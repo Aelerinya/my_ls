@@ -11,5 +11,6 @@
 char *get_options(int ac, char **av);
 char *create_charmap(void);
 int parse_arg(char *arg, char *options);
+char *my_strdup(char const *str);
 
 #endif

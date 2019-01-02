@@ -6,10 +6,12 @@
 ##
 
 MAIN = src/main.c
-SRC = 	src/options.c
+SRC = 	src/options.c \
+	src/my_strdup.c
 OBJ = $(notdir $(MAIN:.c=.o)) $(notdir $(SRC:.c=.o))
 
-TESTS =	tests/test_options.c
+TESTS =	tests/test_options.c \
+	tests/test_my_strdup.c
 TOBJ = $(notdir $(TESTS:.c=.o)) $(notdir $(SRC:.c=.o))
 
 I_PATH = include/
