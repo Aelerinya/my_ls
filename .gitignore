@@ -1,0 +1,10 @@
+a.out
+unit_test
+vgcore.*
+*~
+*.gcda
+*.gcno
+*.o
+#*#
+docs/
+my_ls
