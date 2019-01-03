@@ -24,4 +24,6 @@ void extract_file_names(char *dirpath, char **list);
 int is_sorted(char **list, int (*sorter)(char *, char *));
 void bubble_sort(char **list, int (*sorter)(char *, char*));
 
+void display_list(char **list);
+
 #endif
