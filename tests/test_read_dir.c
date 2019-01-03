@@ -11,7 +11,7 @@
 Test(read_file_names, normal)
 {
     char **list = read_file_names("tests/test_dir");
-    char *theory[7] = {".", "file", "link", "..", "directory", ".hidden", NULL};
+    char *theory[4] = {"file", "link", "directory", NULL};
 
     for (int i = 0; list[i] != NULL; i++)
         cr_assert_str_eq(list[i], theory[i]);
