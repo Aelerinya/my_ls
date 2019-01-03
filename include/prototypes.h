@@ -14,6 +14,9 @@ int parse_arg(char *arg, char *options);
 
 char *my_strdup(char const *str);
 int my_strcmp(char *s1, char *s2);
+int my_strlen(char *str);
+void my_putstr(char *str);
+int my_put_error(char *str);
 
 char **read_file_names(char *dirpath);
 void extract_file_names(char *dirpath, char **list);

@@ -9,13 +9,15 @@ MAIN = src/main.c
 SRC = 	src/options.c \
 	src/my_strdup.c \
 	src/read_dir.c \
-	src/sorting.c
+	src/sorting.c \
+	src/my_putstr.c
 OBJ = $(notdir $(MAIN:.c=.o)) $(notdir $(SRC:.c=.o))
 
 TESTS =	tests/test_options.c \
 	tests/test_my_strdup.c \
 	tests/test_read_dir.c \
-	tests/test_sorting.c
+	tests/test_sorting.c \
+	tests/test_my_putstr.c
 TOBJ = $(notdir $(TESTS:.c=.o)) $(notdir $(SRC:.c=.o))
 
 I_PATH = include/
