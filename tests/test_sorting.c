@@ -10,11 +10,12 @@
 
 Test(my_strcmp, normal)
 {
-    cr_assert_eq(my_strcmp("aa", "a"), 97);
+    cr_assert_eq(my_strcmp("aa", "a"), 1);
     cr_assert_eq(my_strcmp("a", "a "), -32);
-    cr_assert_eq(my_strcmp("abc", "abd"), -1);
+    cr_assert_eq(my_strcmp("abC", "abD"), -1);
     cr_assert_eq(my_strcmp("", ""), 0);
-    cr_assert_eq(my_strcmp("lol", "lol"), 0);
+    cr_assert_eq(my_strcmp("lo.", "lol"), -1);
+    cr_assert_eq(my_strcmp("lol", "lo~"), 1);
 }
 
 Test(is_sorted, normal)
@@ -30,10 +31,18 @@ Test(is_sorted, normal)
     cr_assert(is_sorted(null, &my_strcmp));
 }
 
+Test(is_alpha, normal)
+{
+    cr_assert_eq(is_alpha('\0'), 0);
+    cr_assert_eq(is_alpha('3'), 0);
+    cr_assert_eq(is_alpha('Z'), 1);
+    cr_assert_eq(is_alpha('e'), 1);
+}
+
 Test(bubble_sort, normal)
 {
-    char *unsorted[5] = {"lol", "+lol", "lul", "bonjour", NULL};
-    char *sorted[5] = {"+lol", "bonjour", "lol", "lul", NULL};
+    char *unsorted[5] = {"lal", "+lol", "lul", "bonjour", NULL};
+    char *sorted[5] = {"bonjour", "lal", "+lol", "lul", NULL};
 
     bubble_sort(unsorted, &my_strcmp);
     for (int i = 0; unsorted[i] != NULL; i++)

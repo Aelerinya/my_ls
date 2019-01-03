@@ -21,6 +21,7 @@ int my_put_error(char *str);
 char **read_file_names(char *dirpath);
 void extract_file_names(char *dirpath, char **list);
 
+int is_alpha(char c);
 int is_sorted(char **list, int (*sorter)(char *, char *));
 void bubble_sort(char **list, int (*sorter)(char *, char*));
 
