@@ -14,9 +14,8 @@ int main(int ac, char **av)
     char **files;
 
     if (ac == 1) {
-        files = read_file_names(".");
-        bubble_sort(files, &my_strcmp);
-        display_list(files);
+        display_directory(".");
+        return 0;
     }
     return (0);
 }
