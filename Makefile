@@ -11,7 +11,9 @@ SRC = 	src/options.c \
 	src/read_dir.c \
 	src/sorting.c \
 	src/my_putstr.c \
-	src/display.c
+	src/display.c \
+	src/my_strcat.c \
+	src/my_strncpy.c
 OBJ = $(notdir $(MAIN:.c=.o)) $(notdir $(SRC:.c=.o))
 
 TESTS =	tests/test_options.c \
@@ -19,7 +21,9 @@ TESTS =	tests/test_options.c \
 	tests/test_read_dir.c \
 	tests/test_sorting.c \
 	tests/test_my_putstr.c \
-	tests/test_display.c
+	tests/test_display.c \
+	tests/test_my_strcat.c \
+	tests/test_my_strncpy.c
 TOBJ = $(notdir $(TESTS:.c=.o)) $(notdir $(SRC:.c=.o))
 
 I_PATH = include/
