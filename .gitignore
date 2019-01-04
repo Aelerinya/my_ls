@@ -6,5 +6,6 @@ vgcore.*
 *.gcno
 *.o
 #*#
+.#*
 docs/
 my_ls
