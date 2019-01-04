@@ -10,12 +10,16 @@
 
 char *get_filepath(char *directory, char *file)
 {
-    int len_dir = my_strlen(directory);
-    int len_file = my_strlen(file);
-    int slash = (directory[len_dir - 1] != '/');
-    int len = len_dir + slash + len_file;
-    char *filepath = malloc(sizeof(char) * (len + 1));
+    int slash;
+    int len;
+    char *filepath;
 
+    if (directory == NULL)
+        return file;
+    slash = (directory[my_strlen(directory) - 1] != '/');
+    len = my_strlen(directory) + slash + my_strlen(file);
+    if ((filepath = malloc(sizeof(char) * (len + 1))) == NULL)
+        return NULL;
     *filepath = '\0';
     my_strcat(filepath, directory);
     if (slash)
