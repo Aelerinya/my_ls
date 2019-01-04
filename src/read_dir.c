@@ -42,3 +42,26 @@ char **read_file_names(char *dirpath)
     list[count] = NULL;
     return list;
 }
+
+file_t *convert_file_list(char *directory, char **file_names)
+{
+    int len;
+    file_t *files;
+    char *filepath;
+
+    for (len = 0; file_names[len] != NULL; len++);
+    if ((files = malloc(sizeof(file_t) * (len + 1))) == NULL)
+        return NULL;
+    for (int i = 0; i < len; i++) {
+        files[i].name = file_names[i];
+        filepath = get_filepath(directory, file_names[i]);
+        files[i].stat = malloc(sizeof(struct stat));
+        if (filepath == NULL || files[i].stat == NULL)
+            return NULL;
+        if (lstat(filepath, files[i].stat) == -1)
+            return NULL;
+        free(filepath);
+    }
+    files[len].name = NULL;
+    return files;
+}

@@ -27,6 +27,7 @@ char *my_strncpy(char *dest, char const *src, int n);
 // read_dir.c
 char **read_file_names(char *dirpath);
 void extract_file_names(char *dirpath, char **list);
+file_t *convert_file_list(char *directory, char **file_names);
 
 // sorting.c
 int is_alpha(char c);
