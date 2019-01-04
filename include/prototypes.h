@@ -41,4 +41,7 @@ void display_list(char **list);
 // filepath.c
 char *get_filepath(char *directory, char *file);
 
+// parse_arguments.c
+char **parse_arguments(int ac, char **av);
+
 #endif
