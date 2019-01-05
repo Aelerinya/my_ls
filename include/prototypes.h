@@ -46,4 +46,8 @@ char *get_filepath(char *directory, char *file);
 // parse_arguments.c
 char **parse_arguments(int ac, char **av);
 
+// error.c
+void *my_raise(char *error, char *file);
+void *memory_error(void);
+
 #endif

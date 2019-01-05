@@ -15,7 +15,8 @@ SRC = 	src/options.c \
 	src/my_strcat.c \
 	src/my_strncpy.c \
 	src/filepath.c \
-	src/parse_arguments.c
+	src/parse_arguments.c \
+	src/error.c
 OBJ = $(notdir $(MAIN:.c=.o)) $(notdir $(SRC:.c=.o))
 
 TESTS =	tests/test_options.c \
@@ -27,7 +28,8 @@ TESTS =	tests/test_options.c \
 	tests/test_my_strcat.c \
 	tests/test_my_strncpy.c \
 	tests/test_filepath.c \
-	tests/test_parse_arguments.c
+	tests/test_parse_arguments.c \
+	tests/test_error.c
 TOBJ = $(notdir $(TESTS:.c=.o)) $(notdir $(SRC:.c=.o))
 
 I_PATH = include/
