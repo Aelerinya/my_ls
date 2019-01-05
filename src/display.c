@@ -10,21 +10,23 @@
 
 void display_directory(char *dir_path, int header)
 {
-    char **files;
+    char **list;
+    file_t *files;
 
-    files = read_file_names(dir_path);
-    bubble_sort(files, &my_strcmp);
+    list = read_file_names(dir_path);
+    bubble_sort(list, &my_strcmp);
+    files = convert_file_list(dir_path, list);
     if (header) {
         my_putstr(dir_path);
         my_putstr(":\n");
     }
-    display_list(files);
+    for (int i = 0; files[i].name != NULL; i++) {
+        display_file(files + i);
+    }
 }
 
-void display_list(char **list)
+void display_file(file_t *file)
 {
-    for (int i = 0; list[i] != NULL; i++) {
-        my_putstr(list[i]);
-        my_putstr("\n");
-    }
+    my_putstr(file->name);
+    my_putstr("\n");
 }
