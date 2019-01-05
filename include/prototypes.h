@@ -10,7 +10,7 @@
 
 #include "file_t.h"
 
-int separate_files_and_directory(file_t *files);
+int separate_files_and_directory(file_t *files, char *options);
 
 // options.c
 char *get_options(int ac, char **av);
