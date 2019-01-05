@@ -60,7 +60,8 @@ file_t *convert_file_list(char *directory, char **file_names)
             return NULL;
         if (lstat(filepath, files[i].stat) == -1)
             return NULL;
-        free(filepath);
+        if (directory != NULL)
+            free(filepath);
     }
     files[len].name = NULL;
     return files;
