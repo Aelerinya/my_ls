@@ -9,7 +9,7 @@
 
 char **parse_arguments(int ac, char **av)
 {
-    int file_number;
+    int file_number = 0;
     char **list;
 
     for (int i = 1; i < ac; i++)
@@ -21,5 +21,6 @@ char **parse_arguments(int ac, char **av)
     for (int i = 1; i < ac; i++)
         if (av[i][0] != '-')
             list[file_number++] = av[i];
+    list[file_number] = NULL;
     return list;
 }
