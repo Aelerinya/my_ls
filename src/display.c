@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "prototypes.h"
 
-int display_directory(char *dir_path, int header)
+int display_directory(char *dir_path, int header, char *options)
 {
     char **list;
     file_t *files;
@@ -17,7 +17,7 @@ int display_directory(char *dir_path, int header)
         return (1);
     if ((files = convert_file_list(dir_path, list)) == NULL)
         return (1);
-    bubble_sort(files, &my_alphasort);
+    sort_files(files, options);
     if (header) {
         my_putstr(dir_path);
         my_putstr(":\n");

@@ -8,6 +8,28 @@
 #include <stdlib.h>
 #include "prototypes.h"
 
+void sort_files(file_t *files, char *options)
+{
+    bubble_sort(files, &my_alphasort);
+    if (options['r'])
+        reverse_list(files);
+}
+
+void reverse_list(file_t *files)
+{
+    int len;
+    int middle;
+    file_t tmp;
+
+    for (len = 0; files[len].name != NULL; len++);
+    middle = len / 2;
+    for (int i = 0; i < middle; i++) {
+        tmp = files[i];
+        files[i] = files[len - i - 1];
+        files[len - i - 1] = tmp;
+    }
+}
+
 int is_sorted(file_t *files, int (*sorter)(file_t *, file_t *))
 {
     if (files[0].name == NULL || files[1].name == NULL)

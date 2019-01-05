@@ -43,3 +43,19 @@ Test(bubble_sort, empty_or_one)
     cr_assert_str_eq(one[0].name, "one");
     cr_assert_eq(null[0].name, NULL);
 }
+
+Test(sort_files, reverse)
+{
+    file_t files[3] = {{"a", NULL}, {"b", NULL}, {NULL, NULL}};
+    file_t files2[4] = {{"a", NULL}, {"b", NULL}, {"c", NULL}, {NULL, NULL}};
+    char options[127] = {0};
+
+    options['r'] = 1;
+    sort_files(files, options);
+    cr_assert_str_eq(files[0].name, "b");
+    cr_assert_str_eq(files[1].name, "a");
+    sort_files(files2, options);
+    cr_assert_str_eq(files2[0].name, "c");
+    cr_assert_str_eq(files2[1].name, "b");
+    cr_assert_str_eq(files2[2].name, "a");
+}
