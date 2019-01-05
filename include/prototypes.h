@@ -10,6 +10,8 @@
 
 #include "file_t.h"
 
+void separate_files_and_directory(file_t *files);
+
 // options.c
 char *get_options(int ac, char **av);
 char *create_charmap(void);
@@ -36,7 +38,7 @@ void bubble_sort(char **list, int (*sorter)(char *, char*));
 
 // display.c
 void display_directory(char *dir_path, int header);
-void display_list(char **list);
+void display_file(file_t *file);
 
 // filepath.c
 char *get_filepath(char *directory, char *file);
