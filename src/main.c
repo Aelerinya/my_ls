@@ -21,7 +21,7 @@ int main(int ac, char **av)
         return 0;
     }
     bubble_sort(list, &my_strcmp);
-    if (files = convert_file_list(NULL, list))
+    if ((files = convert_file_list(NULL, list)) == NULL)
         return (84);
     if (separate_files_and_directory(files))
         return (84);
