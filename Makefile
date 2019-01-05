@@ -17,7 +17,8 @@ SRC = 	src/options.c \
 	src/filepath.c \
 	src/parse_arguments.c \
 	src/error.c \
-	src/my_alphasort.c
+	src/my_alphasort.c \
+	src/timesort.c
 OBJ = $(notdir $(MAIN:.c=.o)) $(notdir $(SRC:.c=.o))
 
 TESTS =	tests/test_options.c \
@@ -31,7 +32,8 @@ TESTS =	tests/test_options.c \
 	tests/test_filepath.c \
 	tests/test_parse_arguments.c \
 	tests/test_error.c \
-	tests/test_my_alphasort.c
+	tests/test_my_alphasort.c \
+	tests/test_timesort.c
 TOBJ = $(notdir $(TESTS:.c=.o)) $(notdir $(SRC:.c=.o))
 
 I_PATH = include/

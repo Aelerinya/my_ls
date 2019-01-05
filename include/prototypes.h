@@ -35,7 +35,10 @@ int my_alphasort(file_t *f1, file_t *f2);
 int sort_like_ls(char *s1, char *s2);
 int is_alpha(char c);
 
-//sorting.c
+// timesort.c
+int timesort(file_t *f1, file_t *f2);
+
+// sorting.c
 void sort_files(file_t *files, char *options);
 void reverse_list(file_t *files);
 int is_sorted(file_t *files, int (*sorter)(file_t *, file_t *));

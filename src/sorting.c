@@ -10,7 +10,10 @@
 
 void sort_files(file_t *files, char *options)
 {
-    bubble_sort(files, &my_alphasort);
+    if (options['t'])
+        bubble_sort(files, &timesort);
+    else
+        bubble_sort(files, &my_alphasort);
     if (options['r'])
         reverse_list(files);
 }
