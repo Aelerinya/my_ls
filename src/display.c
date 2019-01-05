@@ -15,9 +15,9 @@ int display_directory(char *dir_path, int header)
 
     if ((list = read_file_names(dir_path)) == NULL)
         return (1);
-    bubble_sort(list, &my_strcmp);
     if ((files = convert_file_list(dir_path, list)) == NULL)
         return (1);
+    bubble_sort(files, &my_alphasort);
     if (header) {
         my_putstr(dir_path);
         my_putstr(":\n");

@@ -19,7 +19,6 @@ int parse_arg(char *arg, char *options);
 
 // Utility functions
 char *my_strdup(char const *str);
-int my_strcmp(char *s1, char *s2);
 int my_strlen(char *str);
 void my_putstr(char *str);
 int my_put_error(char *str);
@@ -32,9 +31,11 @@ void extract_file_names(char *dirpath, char **list);
 file_t *convert_file_list(char *directory, char **file_names);
 
 // sorting.c
+int my_alphasort(file_t *f1, file_t *f2);
+int sort_like_ls(char *s1, char *s2);
 int is_alpha(char c);
-int is_sorted(char **list, int (*sorter)(char *, char *));
-void bubble_sort(char **list, int (*sorter)(char *, char*));
+int is_sorted(file_t *files, int (*sorter)(file_t *, file_t *));
+void bubble_sort(file_t *files, int (*sorter)(file_t *, file_t *));
 
 // display.c
 int display_directory(char *dir_path, int header);

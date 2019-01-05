@@ -8,54 +8,38 @@
 #include <criterion/criterion.h>
 #include "prototypes.h"
 
-Test(my_strcmp, normal)
-{
-    cr_assert_eq(my_strcmp("aa", "a"), 1);
-    cr_assert_eq(my_strcmp("a", "a "), -32);
-    cr_assert_eq(my_strcmp("abC", "abD"), -1);
-    cr_assert_eq(my_strcmp("", ""), 0);
-    cr_assert_eq(my_strcmp("lo.", "lol"), -1);
-    cr_assert_eq(my_strcmp("lol", "lo~"), 1);
-}
-
 Test(is_sorted, normal)
 {
-    char *sorted[4] = {"a", "b", "c", NULL};
-    char *unsorted[4] = {"a", "c", "b", NULL};
-    char *one[2] = {"one", NULL};
-    char *null[1] = {NULL};
+    file_t sorted[4] = {{"a", NULL}, {"b", NULL}, {"c", NULL}, {NULL, NULL}};
+    file_t unsorted[4] = {{"a", NULL}, {"c", NULL}, {"b", NULL}, {NULL, NULL}};
+    file_t one[2] = {{"one", NULL}, {NULL, NULL}};
+    file_t null[1] = {{NULL, NULL}};
 
-    cr_assert(is_sorted(sorted, &my_strcmp));
-    cr_assert_not(is_sorted(unsorted, &my_strcmp));
-    cr_assert(is_sorted(one, &my_strcmp));
-    cr_assert(is_sorted(null, &my_strcmp));
-}
-
-Test(is_alpha, normal)
-{
-    cr_assert_eq(is_alpha('\0'), 0);
-    cr_assert_eq(is_alpha('3'), 0);
-    cr_assert_eq(is_alpha('Z'), 1);
-    cr_assert_eq(is_alpha('e'), 1);
+    cr_assert(is_sorted(sorted, &my_alphasort));
+    cr_assert_not(is_sorted(unsorted, &my_alphasort));
+    cr_assert(is_sorted(one, &my_alphasort));
+    cr_assert(is_sorted(null, &my_alphasort));
 }
 
 Test(bubble_sort, normal)
 {
-    char *unsorted[5] = {"lal", "+lol", "lul", "bonjour", NULL};
-    char *sorted[5] = {"bonjour", "lal", "+lol", "lul", NULL};
+    file_t unsorted[5] = {{"lal", NULL}, {"+lol", NULL}, {"lul", NULL},
+    {"bonjour", NULL}, {NULL, NULL}};
+    file_t sorted[5] = {{"bonjour", NULL}, {"lal", NULL}, {"+lol", NULL},
+    {"lul", NULL}, {NULL, NULL}};
 
-    bubble_sort(unsorted, &my_strcmp);
-    for (int i = 0; unsorted[i] != NULL; i++)
-        cr_assert_str_eq(unsorted[i], sorted[i]);
+    bubble_sort(unsorted, &my_alphasort);
+    for (int i = 0; unsorted[i].name != NULL; i++)
+        cr_assert_str_eq(unsorted[i].name, sorted[i].name);
 }
 
 Test(bubble_sort, empty_or_one)
 {
-    char *one[2] = {"one", NULL};
-    char *null[1] = {NULL};
+    file_t one[2] = {{"one", NULL}, {NULL, NULL}};
+    file_t null[1] = {{NULL, NULL}};
 
-    bubble_sort(one, &my_strcmp);
-    bubble_sort(null, &my_strcmp);
-    cr_assert_str_eq(*one, "one");
-    cr_assert_eq(*null, NULL);
+    bubble_sort(one, &my_alphasort);
+    bubble_sort(null, &my_alphasort);
+    cr_assert_str_eq(one[0].name, "one");
+    cr_assert_eq(null[0].name, NULL);
 }
