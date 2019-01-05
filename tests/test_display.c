@@ -14,10 +14,10 @@ void redirect(void);
 
 Test(display_list, normal, .init = redirect)
 {
-    char *list[5] = {"abc", "lol", "x", "", NULL};
+    file_t file = {"abc", NULL};
 
-    display_list(list);
-    cr_assert_stdout_eq_str("abc\nlol\nx\n\n");
+    display_file(&file);
+    cr_assert_stdout_eq_str("abc\n");
 }
 
 Test(display_directory, no_header, .init = redirect)
