@@ -8,21 +8,23 @@
 #include <stdlib.h>
 #include "prototypes.h"
 
-void display_directory(char *dir_path, int header)
+int display_directory(char *dir_path, int header)
 {
     char **list;
     file_t *files;
 
-    list = read_file_names(dir_path);
+    if ((list = read_file_names(dir_path)) == NULL)
+        return (1);
     bubble_sort(list, &my_strcmp);
-    files = convert_file_list(dir_path, list);
+    if ((files = convert_file_list(dir_path, list)) == NULL)
+        return (1);
     if (header) {
         my_putstr(dir_path);
         my_putstr(":\n");
     }
-    for (int i = 0; files[i].name != NULL; i++) {
+    for (int i = 0; files[i].name != NULL; i++)
         display_file(files + i);
-    }
+    return (0);
 }
 
 void display_file(file_t *file)

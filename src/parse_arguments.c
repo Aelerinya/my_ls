@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include "prototypes.h"
 
 char **parse_arguments(int ac, char **av)
 {
@@ -16,7 +17,7 @@ char **parse_arguments(int ac, char **av)
         if (av[i][0] != '-')
             file_number++;
     if ((list = malloc(sizeof(char *) * (file_number + 1))) == NULL)
-        return NULL;
+        return memory_error();
     file_number = 0;
     for (int i = 1; i < ac; i++)
         if (av[i][0] != '-')

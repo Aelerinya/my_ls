@@ -30,14 +30,14 @@ char **read_file_names(char *dirpath)
     struct dirent *file;
 
     if (dir == NULL)
-        return NULL;
+        return my_raise("Could not open directory ", dirpath);
     while ((file = readdir(dir)) != NULL)
         if (file->d_name[0] != '.')
             count++;
     closedir(dir);
     list = malloc(sizeof(char *) * (count + 1));
     if (list == NULL)
-        return NULL;
+        return memory_error();
     extract_file_names(dirpath, list);
     list[count] = NULL;
     return list;
@@ -51,15 +51,15 @@ file_t *convert_file_list(char *directory, char **file_names)
 
     for (len = 0; file_names[len] != NULL; len++);
     if ((files = malloc(sizeof(file_t) * (len + 1))) == NULL)
-        return NULL;
+        return memory_error();
     for (int i = 0; i < len; i++) {
         files[i].name = file_names[i];
         filepath = get_filepath(directory, file_names[i]);
         files[i].stat = malloc(sizeof(struct stat));
         if (filepath == NULL || files[i].stat == NULL)
-            return NULL;
+            return memory_error();
         if (lstat(filepath, files[i].stat) == -1)
-            return NULL;
+            return my_raise("Could not open file ", filepath);
         if (directory != NULL)
             free(filepath);
     }

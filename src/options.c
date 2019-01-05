@@ -13,7 +13,7 @@ char *create_charmap(void)
     char *map = malloc(sizeof(char) * 127);
 
     if (map == NULL)
-        return NULL;
+        return memory_error();
     for (int i = 0; i < 127; i++)
         map[i] = 0;
     return map;

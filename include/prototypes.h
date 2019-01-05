@@ -10,7 +10,7 @@
 
 #include "file_t.h"
 
-void separate_files_and_directory(file_t *files);
+int separate_files_and_directory(file_t *files);
 
 // options.c
 char *get_options(int ac, char **av);
@@ -37,7 +37,7 @@ int is_sorted(char **list, int (*sorter)(char *, char *));
 void bubble_sort(char **list, int (*sorter)(char *, char*));
 
 // display.c
-void display_directory(char *dir_path, int header);
+int display_directory(char *dir_path, int header);
 void display_file(file_t *file);
 
 // filepath.c

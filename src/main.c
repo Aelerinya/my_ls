@@ -21,12 +21,14 @@ int main(int ac, char **av)
         return 0;
     }
     bubble_sort(list, &my_strcmp);
-    files = convert_file_list(NULL, list);
-    separate_files_and_directory(files);
+    if (files = convert_file_list(NULL, list))
+        return (84);
+    if (separate_files_and_directory(files))
+        return (84);
     return (0);
 }
 
-void separate_files_and_directory(file_t *files)
+int separate_files_and_directory(file_t *files)
 {
     int is_there_regular_files = 0;
 
@@ -40,7 +42,9 @@ void separate_files_and_directory(file_t *files)
     for(int i = 0; files[i].name != NULL; i++) {
         if (S_ISDIR(files[i].stat->st_mode)) {
             my_putstr(i != 0 ? "\n" : "");
-            display_directory(files[i].name, (files[1].name != NULL));
+            if (display_directory(files[i].name, (files[1].name != NULL)))
+                return (1);
         }
     }
+    return (0);
 }
