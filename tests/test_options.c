@@ -31,13 +31,21 @@ Test(parse_arg, normal)
 Test(get_options, normal)
 {
     int ac = 4;
-    char *av[4] = {"./my_ls", "-lAh", "test", "-li"};
+    char *av[4] = {"./my_ls", "-lRr", "test", "-ld"};
     char *map = get_options(ac, av);
 
     cr_assert(map['l']);
-    cr_assert(map['A']);
-    cr_assert(map['h']);
-    cr_assert(map['i']);
+    cr_assert(map['R']);
+    cr_assert(map['r']);
+    cr_assert(map['d']);
     cr_assert_not(map['z']);
     cr_assert_not(map['-']);
+}
+
+Test(get_options, invalid)
+{
+    int ac = 2;
+    char *av[2] = {"./my_ls", "-z"};
+
+    cr_assert_eq(get_options(ac, av), NULL);
 }

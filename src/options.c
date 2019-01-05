@@ -5,8 +5,10 @@
 ** options parser
 */
 
+#include <unistd.h>
 #include <stdlib.h>
 #include "prototypes.h"
+#include "options.h"
 
 char *create_charmap(void)
 {
@@ -28,6 +30,14 @@ int parse_arg(char *arg, char *options)
     return 0;
 }
 
+int is_valid(char option)
+{
+    for (int i = 0; valid_options[i] != '\0'; i++)
+        if (valid_options[i] == option)
+            return 1;
+    return 0;
+}
+
 char *get_options(int ac, char **av)
 {
     char *options = create_charmap();
@@ -36,5 +46,13 @@ char *get_options(int ac, char **av)
         return NULL;
     for (int i = 1; i < ac; i++)
         parse_arg(av[i], options);
+    for (int i = 0; i < 127; i++) {
+        if (options[i] && !is_valid(i)) {
+            my_put_error("Invalid option : ");
+            write(2, &i, 1);
+            my_put_error("\nTry -h for help.\n");
+            return NULL;
+        }
+    }
     return options;
 }
