@@ -8,6 +8,8 @@
 #include <criterion/criterion.h>
 #include "prototypes.h"
 
+void redirect(void);
+
 Test(create_charmap, normal)
 {
     char *map = create_charmap();
@@ -42,7 +44,7 @@ Test(get_options, normal)
     cr_assert_not(map['-']);
 }
 
-Test(get_options, invalid)
+Test(get_options, invalid, .init = redirect)
 {
     int ac = 2;
     char *av[2] = {"./my_ls", "-z"};

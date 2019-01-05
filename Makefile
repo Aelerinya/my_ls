@@ -56,9 +56,9 @@ fclean: clean
 re: fclean all
 
 tests_run:
-	gcc -c $(TESTS) $(SRC) -I$(I_PATH) $(FLAGS) --coverage
-	gcc -o unit_test $(TOBJ) $(FLAGS) --coverage -lcriterion
-	./unit_test
-	rm -f unit_test $(TOBJ)
+	@gcc -c $(TESTS) $(SRC) -I$(I_PATH) $(FLAGS) --coverage
+	@gcc -o unit_test $(TOBJ) $(FLAGS) --coverage -lcriterion
+	@./unit_test
+	@rm -f unit_test $(TOBJ)
 
 .PHONY: all clean fclean re

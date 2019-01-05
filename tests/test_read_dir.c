@@ -10,6 +10,8 @@
 #include <criterion/criterion.h>
 #include "prototypes.h"
 
+void redirect(void);
+
 Test(read_file_names, normal)
 {
     char **list = read_file_names("tests/test_dir");
@@ -19,7 +21,7 @@ Test(read_file_names, normal)
         cr_assert_str_eq(list[i], theory[i]);
 }
 
-Test(read_file_names, invalid)
+Test(read_file_names, invalid, .init = redirect)
 {
     cr_assert_eq(read_file_names("tests/no_dir"), NULL);
 }
@@ -37,7 +39,7 @@ Test(convert_file_list, normal)
     cr_assert(S_ISDIR(files[2].stat->st_mode), "mode : %#o", files[2].stat->st_mode & S_IFMT);
 }
 
-Test(convert_file_list, invalid)
+Test(convert_file_list, invalid, .init = redirect)
 {
     char *list[2] = {"not_a_file", NULL};
     file_t *files = convert_file_list("tests/test_dir", list);
