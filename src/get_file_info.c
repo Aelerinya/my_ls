@@ -83,7 +83,7 @@ char **get_file_info(file_t *file, long *total)
     info[F_GROUP] = my_strdup((grp) ? grp->gr_name : "?");
     info[F_SIZE] = my_nbr_to_str(file->stat->st_size);
     info[F_TIME] = get_time(file);
-    *total += file->stat->st_size;
+    *total += file->stat->st_blocks;
     return info;
 }
 
@@ -102,7 +102,7 @@ char ***get_all_file_infos(file_t *files)
             return NULL;
     }
     my_putstr("total ");
-    my_putstr(my_nbr_to_str(total / 1024));
+    my_putstr(my_nbr_to_str(total / 2));
     my_putstr("\n");
     return infos;
 }
