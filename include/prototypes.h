@@ -45,6 +45,8 @@ int is_sorted(file_t *files, int (*sorter)(file_t *, file_t *));
 void bubble_sort(file_t *files, int (*sorter)(file_t *, file_t *));
 
 // display.c
+int display_all_directories(char *parent_path,
+file_t *files, int header, char *options);
 int display_directory(char *dir_path, int header, char *options);
 void display_file(file_t *file);
 

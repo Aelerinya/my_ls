@@ -17,7 +17,7 @@ int main(int ac, char **av)
     if (options == NULL || list == NULL)
         return (84);
     if (list[0] == NULL) {
-        display_directory(".", 0, options);
+        display_directory(".", options['R'], options);
         return 0;
     }
     if ((files = convert_file_list(NULL, list)) == NULL)
@@ -30,6 +30,7 @@ int main(int ac, char **av)
 
 int separate_files_and_directory(file_t *files, char *options)
 {
+    int header = (files[1].name != NULL) || options['R'];
     int is_there_regular_files = 0;
     int is_there_directories = 0;
 
@@ -42,12 +43,7 @@ int separate_files_and_directory(file_t *files, char *options)
             is_there_directories = 1;
     }
     my_putstr(is_there_regular_files && is_there_directories ? "\n" : "");
-    for(int i = 0; files[i].name != NULL; i++) {
-        if (!options['d'] && S_ISDIR(files[i].stat->st_mode)) {
-            my_putstr(i != 0 ? "\n" : "");
-            if (display_directory(files[i].name, !!files[1].name, options))
-                return (1);
-        }
-    }
+    if (display_all_directories(NULL, files, header, options))
+        return (0);
     return (0);
 }
