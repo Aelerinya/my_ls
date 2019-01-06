@@ -36,7 +36,7 @@ int separate_files_and_directory(file_t *files, char *options)
 
     for(int i = 0; files[i].name != NULL; i++) {
         if (options['d'] || S_ISREG(files[i].stat->st_mode)) {
-            display_file(files + i);
+            display_file(files + i, options);
             is_there_regular_files = 1;
         }
         else if (S_ISDIR(files[i].stat->st_mode))

@@ -14,9 +14,10 @@ void redirect(void);
 
 Test(display_list, normal, .init = redirect)
 {
+    char options[127] = {0};
     file_t file = {"abc", NULL};
 
-    display_file(&file);
+    display_file(&file, options);
     cr_assert_stdout_eq_str("abc\n");
 }
 

@@ -41,14 +41,8 @@ int display_directory(char *dir_path, int header, char *options)
         my_putstr(":\n");
     }
     for (int i = 0; files[i].name != NULL; i++)
-        display_file(files + i);
+        display_file(files + i, options);
     if (options['R'])
         display_all_directories(dir_path, files, 2, options);
     return (0);
-}
-
-void display_file(file_t *file)
-{
-    my_putstr(file->name);
-    my_putstr("\n");
 }

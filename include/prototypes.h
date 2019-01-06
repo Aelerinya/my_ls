@@ -24,6 +24,7 @@ void my_putstr(char *str);
 int my_put_error(char *str);
 char *my_strcat(char *dest, char const *src);
 char *my_strncpy(char *dest, char const *src, int n);
+char *my_nbr_to_str(long long int nb);
 
 // read_dir.c
 char **read_file_names(char *dirpath);
@@ -48,7 +49,9 @@ void bubble_sort(file_t *files, int (*sorter)(file_t *, file_t *));
 int display_all_directories(char *parent_path,
 file_t *files, int header, char *options);
 int display_directory(char *dir_path, int header, char *options);
-void display_file(file_t *file);
+
+// display_file.c
+void display_file(file_t *file, char *options);
 
 // filepath.c
 char *get_filepath(char *directory, char *file);
