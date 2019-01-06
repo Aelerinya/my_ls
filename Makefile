@@ -19,7 +19,7 @@ SRC = 	src/options.c \
 	src/error.c \
 	src/my_alphasort.c \
 	src/timesort.c \
-	src/display_file.c \
+	src/get_file_info.c \
 	src/my_nbr_to_str.c
 OBJ = $(notdir $(MAIN:.c=.o)) $(notdir $(SRC:.c=.o))
 

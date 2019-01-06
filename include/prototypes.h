@@ -10,6 +10,7 @@
 
 #include "file_t.h"
 
+file_t *remove_directories(file_t *files);
 int separate_files_and_directory(file_t *files, char *options);
 
 // options.c
@@ -49,9 +50,12 @@ void bubble_sort(file_t *files, int (*sorter)(file_t *, file_t *));
 int display_all_directories(char *parent_path,
 file_t *files, int header, char *options);
 int display_directory(char *dir_path, int header, char *options);
+int display_all_files(file_t *file, char *options);
+void display_file_list(file_t *file, char **info, int *max);
 
-// display_file.c
-void display_file(file_t *file, char *options);
+// get_file_info.c
+char **get_file_info(file_t *file, long *total);
+char ***get_all_file_infos(file_t *file);
 
 // filepath.c
 char *get_filepath(char *directory, char *file);
