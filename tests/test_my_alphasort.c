@@ -21,7 +21,8 @@ Test(sort_like_ls, normal)
 Test(is_alpha, normal)
 {
     cr_assert_eq(is_alpha('\0'), 0);
-    cr_assert_eq(is_alpha('3'), 0);
+    cr_assert_eq(is_alpha('3'), 1);
     cr_assert_eq(is_alpha('Z'), 1);
     cr_assert_eq(is_alpha('e'), 1);
+    cr_assert_eq(is_alpha('~'), 0);
 }

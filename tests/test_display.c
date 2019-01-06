@@ -12,12 +12,12 @@
 
 void redirect(void);
 
-Test(display_list, normal, .init = redirect)
+Test(display_all_files, normal, .init = redirect)
 {
     char options[127] = {0};
-    file_t file = {"abc", NULL};
+    file_t file[2] = {{"abc", NULL}, {NULL, NULL}};
 
-    display_file(&file, options);
+    display_all_files(file, options);
     cr_assert_stdout_eq_str("abc\n");
 }
 
