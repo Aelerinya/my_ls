@@ -5,6 +5,7 @@
 ** Read a directory content and stores all file names
 */
 
+#include <unistd.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <dirent.h>
@@ -60,9 +61,28 @@ file_t *convert_file_list(char *directory, char **file_names)
             return memory_error();
         if (lstat(filepath, files[i].stat) == -1)
             return my_raise("Could not open file ", filepath);
+        if (get_link_path(files + i, filepath) == NULL)
+            return NULL;
         if (directory != NULL)
             free(filepath);
     }
     files[len].name = NULL;
     return files;
+}
+
+char *get_link_path(file_t *file, char *filepath)
+{
+    char *link;
+    ssize_t size;
+
+    if ((file->stat->st_mode & S_IFMT) != S_IFLNK)
+        return (file->link = "");
+    if ((link = malloc(sizeof(char) * 261)) == NULL)
+        return memory_error();
+    my_strncpy(link, " -> ", 4);
+    if ((size = readlink(filepath, link + 4, 256)) == -1)
+        return my_raise("Could not read link ", filepath);
+    link[size + 4] = '\0';
+    file->link = link;
+    return (link);
 }

@@ -15,9 +15,9 @@ void redirect(void);
 Test(display_all_files, normal, .init = redirect)
 {
     char options[127] = {0};
-    file_t file[2] = {{"abc", NULL}, {NULL, NULL}};
+    file_t file[2] = {{"abc", NULL, NULL}, {NULL, NULL, NULL}};
 
-    display_all_files(file, options);
+    display_all_files(file, options, 0);
     cr_assert_stdout_eq_str("abc\n");
 }
 

@@ -84,5 +84,6 @@ void display_file_list(file_t *file, char **info, int *max)
         my_putstr(" ");
     }
     my_putstr(file->name);
+    my_putstr(file->link);
     my_putstr("\n");
 }

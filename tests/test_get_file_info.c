@@ -15,7 +15,7 @@ void redirect(void);
 Test(get_file_type, all)
 {
     struct stat stats;
-    file_t file = {NULL, &stats};
+    file_t file = {NULL, &stats, NULL};
 
     stats.st_mode = S_IFREG;
     cr_assert_eq(get_file_type(&file), '-');
@@ -38,7 +38,7 @@ Test(get_file_type, all)
 Test(get_mode, all)
 {
     struct stat stats;
-    file_t file = {NULL, &stats};
+    file_t file = {NULL, &stats, NULL};
 
     stats.st_mode = S_IFREG;
     cr_assert_str_eq(get_mode(&file), "----------");
@@ -52,7 +52,7 @@ Test(get_mode, all)
 Test(get_time, all)
 {
     struct stat stats;
-    file_t file = {NULL, &stats};
+    file_t file = {NULL, &stats, NULL};
 
     stats.st_mtime = 1546820389;
     cr_assert_str_eq(get_time(&file), "Jan  7 01:19");
@@ -62,7 +62,7 @@ Test(get_all_file_infos, all, .init = redirect)
 {
     char **list = read_file_names("tests/test_dir2");
     file_t *files = convert_file_list("tests/test_dir2", list);
-    char ***infos = get_all_file_infos(files);
+    char ***infos = get_all_file_infos(files, 0);
 
     cr_assert_stdout_eq_str("total 0\n");
     cr_assert_str_eq(infos[0][F_MODE], "-rw-r--r--");

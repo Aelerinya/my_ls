@@ -5,15 +5,33 @@
 ** unit tests for sorting.c
 */
 
+#include <stdlib.h>
 #include <criterion/criterion.h>
 #include "prototypes.h"
 
+file_t *create_test_list(char **list)
+{
+    int len;
+    file_t *files;
+
+    for (len = 0; list[len] != NULL; len++);
+    files = malloc(sizeof(file_t) * (len + 1));
+    for (int i = 0; list[i] != NULL; i++) {
+        files[i].name = list[i];
+        files[i].stat = NULL;
+        files[i].link = NULL;
+    }
+    return files;
+}
+
 Test(is_sorted, normal)
 {
-    file_t sorted[4] = {{"a", NULL}, {"b", NULL}, {"c", NULL}, {NULL, NULL}};
-    file_t unsorted[4] = {{"a", NULL}, {"c", NULL}, {"b", NULL}, {NULL, NULL}};
-    file_t one[2] = {{"one", NULL}, {NULL, NULL}};
-    file_t null[1] = {{NULL, NULL}};
+    char *list[5] = {"a", "b", "c", "d", NULL};
+    file_t *sorted = create_test_list(list);
+    char *list2[4] = {"a", "c", "b", NULL};
+    file_t *unsorted = create_test_list(list2);
+    file_t one[2] = {{"one", NULL, NULL}, {NULL, NULL, NULL}};
+    file_t null[1] = {{NULL, NULL, NULL}};
 
     cr_assert(is_sorted(sorted, &my_alphasort));
     cr_assert_not(is_sorted(unsorted, &my_alphasort));
@@ -23,10 +41,10 @@ Test(is_sorted, normal)
 
 Test(bubble_sort, normal)
 {
-    file_t unsorted[5] = {{"lal", NULL}, {"+lol", NULL}, {"lul", NULL},
-    {"bonjour", NULL}, {NULL, NULL}};
-    file_t sorted[5] = {{"bonjour", NULL}, {"lal", NULL}, {"+lol", NULL},
-    {"lul", NULL}, {NULL, NULL}};
+    char *list[5] = {"lal", "+lol", "lul", "bonjour", NULL};
+    file_t *unsorted = create_test_list(list);
+    char *list2[5] = {"bonjour", "lal", "+lol", "lul", NULL};
+    file_t *sorted = create_test_list(list2);
 
     bubble_sort(unsorted, &my_alphasort);
     for (int i = 0; unsorted[i].name != NULL; i++)
@@ -35,8 +53,8 @@ Test(bubble_sort, normal)
 
 Test(bubble_sort, empty_or_one)
 {
-    file_t one[2] = {{"one", NULL}, {NULL, NULL}};
-    file_t null[1] = {{NULL, NULL}};
+    file_t one[2] = {{"one", NULL, NULL}, {NULL, NULL, NULL}};
+    file_t null[1] = {{NULL, NULL, NULL}};
 
     bubble_sort(one, &my_alphasort);
     bubble_sort(null, &my_alphasort);
@@ -46,8 +64,10 @@ Test(bubble_sort, empty_or_one)
 
 Test(sort_files, reverse)
 {
-    file_t files[3] = {{"a", NULL}, {"b", NULL}, {NULL, NULL}};
-    file_t files2[4] = {{"a", NULL}, {"b", NULL}, {"c", NULL}, {NULL, NULL}};
+    char *list[3] = {"a", "b", NULL};
+    file_t *files = create_test_list(list);
+    char *list2[4] = {"a", "b", "c", NULL};
+    file_t *files2 = create_test_list(list2);
     char options[127] = {0};
 
     options['r'] = 1;

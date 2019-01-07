@@ -31,6 +31,7 @@ char *my_nbr_to_str(long long int nb);
 char **read_file_names(char *dirpath);
 void extract_file_names(char *dirpath, char **list);
 file_t *convert_file_list(char *directory, char **file_names);
+char *get_link_path(file_t *files, char *filepath);
 
 // my_alphasort.c
 int my_alphasort(file_t *f1, file_t *f2);

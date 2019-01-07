@@ -12,9 +12,9 @@
 Test(timesort, normal)
 {
     struct stat stat1;
-    file_t file1 = {"test", &stat1};
+    file_t file1 = {"test", &stat1, NULL};
     struct stat stat2;
-    file_t file2 = {"test", &stat2};
+    file_t file2 = {"test", &stat2, NULL};
 
     stat1.st_mtime = 100;
     stat1.st_mtime = 200;

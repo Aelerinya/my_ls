@@ -32,11 +32,12 @@ Test(convert_file_list, normal)
     file_t *files = convert_file_list("tests/test_dir", list);
 
     cr_assert_str_eq(files[0].name, "file");
-    cr_assert(S_ISREG(files[0].stat->st_mode), "mode : %#o", files[0].stat->st_mode & S_IFMT);
+    cr_assert(S_ISREG(files[0].stat->st_mode));
     cr_assert_str_eq(files[1].name, "link");
-    cr_assert(S_ISLNK(files[1].stat->st_mode), "mode : %#o", files[1].stat->st_mode & S_IFMT);
+    cr_assert(S_ISLNK(files[1].stat->st_mode));
     cr_assert_str_eq(files[2].name, "directory");
-    cr_assert(S_ISDIR(files[2].stat->st_mode), "mode : %#o", files[2].stat->st_mode & S_IFMT);
+    cr_assert(S_ISDIR(files[2].stat->st_mode));
+    convert_file_list(NULL, read_file_names("."));
 }
 
 Test(convert_file_list, invalid, .init = redirect)

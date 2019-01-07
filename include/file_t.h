@@ -14,4 +14,5 @@ enum field {F_MODE, F_LINK, F_OWNER, F_GROUP, F_SIZE, F_TIME};
 typedef struct file {
     char *name;
     struct stat *stat;
+    char *link;
 } file_t;
