@@ -60,7 +60,7 @@ int separate_files_and_directory(file_t *files, char *options)
         else if (S_ISDIR(files[i].stat->st_mode))
             is_there_directories = 1;
     }
-    if (display_all_files((options['d'] ? files : no_dir), options))
+    if (display_all_files((options['d'] ? files : no_dir), options, 1))
         return (1);
     my_putstr(is_there_regular_files && is_there_directories ? "\n" : "");
     if (display_all_directories(NULL, files, header, options))

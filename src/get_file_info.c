@@ -87,7 +87,7 @@ char **get_file_info(file_t *file, long *total)
     return info;
 }
 
-char ***get_all_file_infos(file_t *files)
+char ***get_all_file_infos(file_t *files, int no_total)
 {
     char ***infos;
     int len;
@@ -101,8 +101,10 @@ char ***get_all_file_infos(file_t *files)
         if ((infos[i] = get_file_info(files + i, &total)) == NULL)
             return NULL;
     }
-    my_putstr("total ");
-    my_putstr(my_nbr_to_str(total / 2));
-    my_putstr("\n");
+    if (!no_total) {
+        my_putstr("total ");
+        my_putstr(my_nbr_to_str(total / 2));
+        my_putstr("\n");
+    }
     return infos;
 }

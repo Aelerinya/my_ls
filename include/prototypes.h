@@ -50,7 +50,7 @@ void bubble_sort(file_t *files, int (*sorter)(file_t *, file_t *));
 int display_all_directories(char *parent_path,
 file_t *files, int header, char *options);
 int display_directory(char *dir_path, int header, char *options);
-int display_all_files(file_t *file, char *options);
+int display_all_files(file_t *file, char *options, int no_total);
 void display_file_list(file_t *file, char **info, int *max);
 
 // get_file_info.c
@@ -58,7 +58,7 @@ char get_file_type(file_t *file);
 char *get_mode(file_t *file);
 char *get_time(file_t *file);
 char **get_file_info(file_t *file, long *total);
-char ***get_all_file_infos(file_t *file);
+char ***get_all_file_infos(file_t *file, int no_total);
 
 // filepath.c
 char *get_filepath(char *directory, char *file);

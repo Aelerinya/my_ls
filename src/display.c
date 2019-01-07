@@ -40,14 +40,14 @@ int display_directory(char *dir_path, int header, char *options)
         my_putstr(dir_path);
         my_putstr(":\n");
     }
-    if (display_all_files(files, options))
+    if (display_all_files(files, options, 0))
         return (1);
     if (options['R'])
         display_all_directories(dir_path, files, 2, options);
     return (0);
 }
 
-int display_all_files(file_t *files, char *options)
+int display_all_files(file_t *files, char *options, int no_total)
 {
     char ***infos = NULL;
     int max[6] = {0};
@@ -59,7 +59,7 @@ int display_all_files(file_t *files, char *options)
         }
         return (0);
     }
-    if ((infos = get_all_file_infos(files)) == NULL)
+    if ((infos = get_all_file_infos(files, no_total)) == NULL)
         return (1);
     for (int i = 0; files[i].name != NULL; i++)
         for (int j = 0; j < 6; j++)
