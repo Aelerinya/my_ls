@@ -54,6 +54,9 @@ int display_all_files(file_t *file, char *options);
 void display_file_list(file_t *file, char **info, int *max);
 
 // get_file_info.c
+char get_file_type(file_t *file);
+char *get_mode(file_t *file);
+char *get_time(file_t *file);
 char **get_file_info(file_t *file, long *total);
 char ***get_all_file_infos(file_t *file);
 

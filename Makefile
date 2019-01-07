@@ -36,7 +36,8 @@ TESTS =	tests/test_options.c \
 	tests/test_error.c \
 	tests/test_my_alphasort.c \
 	tests/test_timesort.c \
-	tests/test_my_nbr_to_str.c
+	tests/test_my_nbr_to_str.c \
+	tests/test_get_file_info.c
 TOBJ = $(notdir $(TESTS:.c=.o)) $(notdir $(SRC:.c=.o))
 
 I_PATH = include/
