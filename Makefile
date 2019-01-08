@@ -20,7 +20,8 @@ SRC = 	src/options.c \
 	src/my_alphasort.c \
 	src/timesort.c \
 	src/get_file_info.c \
-	src/my_nbr_to_str.c
+	src/my_nbr_to_str.c \
+	src/get_executable_bit.c
 OBJ = $(notdir $(MAIN:.c=.o)) $(notdir $(SRC:.c=.o))
 
 TESTS =	tests/test_options.c \
@@ -37,7 +38,8 @@ TESTS =	tests/test_options.c \
 	tests/test_my_alphasort.c \
 	tests/test_timesort.c \
 	tests/test_my_nbr_to_str.c \
-	tests/test_get_file_info.c
+	tests/test_get_file_info.c \
+	tests/test_get_executable_bit.c
 TOBJ = $(notdir $(TESTS:.c=.o)) $(notdir $(SRC:.c=.o))
 
 I_PATH = include/

@@ -41,13 +41,13 @@ char *get_mode(file_t *file)
     mode[0] = get_file_type(file);
     mode[1] = (file->stat->st_mode & S_IRUSR) ? 'r' : '-';
     mode[2] = (file->stat->st_mode & S_IWUSR) ? 'w' : '-';
-    mode[3] = (file->stat->st_mode & S_IXUSR) ? 'x' : '-';
+    mode[3] = get_executable_bit(file, S_IXUSR);
     mode[4] = (file->stat->st_mode & S_IRGRP) ? 'r' : '-';
     mode[5] = (file->stat->st_mode & S_IWGRP) ? 'w' : '-';
-    mode[6] = (file->stat->st_mode & S_IXGRP) ? 'x' : '-';
+    mode[6] = get_executable_bit(file, S_IXGRP);
     mode[7] = (file->stat->st_mode & S_IROTH) ? 'r' : '-';
     mode[8] = (file->stat->st_mode & S_IWOTH) ? 'w' : '-';
-    mode[9] = (file->stat->st_mode & S_IXOTH) ? 'x' : '-';
+    mode[9] = get_executable_bit(file, S_IXOTH);
     mode[10] = '\0';
     return mode;
 }
