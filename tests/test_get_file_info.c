@@ -48,7 +48,6 @@ Test(get_mode, all)
     cr_assert_str_eq(get_mode(&file), "-rwxrwxrwx");
 }
 
-
 Test(get_time, all)
 {
     struct stat stats;

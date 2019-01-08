@@ -49,7 +49,7 @@ void bubble_sort(file_t *files, int (*sorter)(file_t *, file_t *))
 
     if (files[0].name == NULL || files[1].name == NULL)
         return;
-    while(!is_sorted(files, sorter)) {
+    while (!is_sorted(files, sorter)) {
         for (int i = 0; files[i + 1].name != NULL; i++) {
             if (sorter(files + i, files + i + 1) > 0) {
                 tmp = files[i];

@@ -44,27 +44,35 @@ char **read_file_names(char *dirpath)
     return list;
 }
 
+static void *fill_file(file_t *file, char *directory)
+{
+    char *filepath;
+
+    filepath = get_filepath(directory, file->name);
+    file->stat = malloc(sizeof(struct stat));
+    if (filepath == NULL || file->stat == NULL)
+        return memory_error();
+    if (lstat(filepath, file->stat) == -1)
+        return my_raise("Could not open file ", filepath);
+    if (get_link_path(file, filepath) == NULL)
+        return NULL;
+    if (directory != NULL)
+        free(filepath);
+    return ((void *)1);
+}
+
 file_t *convert_file_list(char *directory, char **file_names)
 {
     int len;
     file_t *files;
-    char *filepath;
 
     for (len = 0; file_names[len] != NULL; len++);
     if ((files = malloc(sizeof(file_t) * (len + 1))) == NULL)
         return memory_error();
     for (int i = 0; i < len; i++) {
         files[i].name = file_names[i];
-        filepath = get_filepath(directory, file_names[i]);
-        files[i].stat = malloc(sizeof(struct stat));
-        if (filepath == NULL || files[i].stat == NULL)
-            return memory_error();
-        if (lstat(filepath, files[i].stat) == -1)
-            return my_raise("Could not open file ", filepath);
-        if (get_link_path(files + i, filepath) == NULL)
+        if ((fill_file(files + i, directory)) == NULL)
             return NULL;
-        if (directory != NULL)
-            free(filepath);
     }
     files[len].name = NULL;
     return files;

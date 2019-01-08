@@ -34,14 +34,14 @@ file_t *remove_directories(file_t *files)
     int file_count = 0;
     file_t *only_files;
 
-    for(int i = 0; files[i].name != NULL; i++)
+    for (int i = 0; files[i].name != NULL; i++)
         if (!S_ISDIR(files[i].stat->st_mode))
             file_count++;
     if ((only_files = malloc(sizeof(file_t) * (file_count + 1))) == NULL)
         return memory_error();
     only_files[file_count].name = NULL;
     file_count = 0;
-    for(int i = 0; files[i].name != NULL; i++)
+    for (int i = 0; files[i].name != NULL; i++)
         if (!S_ISDIR(files[i].stat->st_mode))
             only_files[file_count++] = files[i];
     return only_files;
@@ -54,7 +54,7 @@ int separate_files_and_directory(file_t *files, char *options)
     int is_there_directories = 0;
     file_t *no_dir = remove_directories(files);
 
-    for(int i = 0; files[i].name != NULL; i++) {
+    for (int i = 0; files[i].name != NULL; i++) {
         if (options['d'] || S_ISREG(files[i].stat->st_mode))
             is_there_regular_files = 1;
         else if (S_ISDIR(files[i].stat->st_mode))

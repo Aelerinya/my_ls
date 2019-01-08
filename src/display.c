@@ -14,7 +14,7 @@ file_t *files, int header, char *options)
     char *path;
     int first = 1;
 
-    for(int i = 0; files[i].name != NULL; i++) {
+    for (int i = 0; files[i].name != NULL; i++) {
         if (S_ISDIR(files[i].stat->st_mode)) {
             my_putstr((!first || header == 2) ? "\n" : "");
             first = 0;
