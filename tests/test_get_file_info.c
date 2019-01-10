@@ -68,7 +68,8 @@ Test(get_all_file_infos, all, .init = redirect)
     cr_assert_str_eq(infos[0][F_LINK], "1");
     cr_assert_str_eq(infos[0][F_OWNER], "lucie");
     cr_assert_str_eq(infos[0][F_GROUP], "lucie");
-    cr_assert_str_eq(infos[0][F_SIZE], "0");
+    cr_assert_str_eq(infos[0][F_MAJ], "");
+    cr_assert_str_eq(infos[0][F_SIZE_MIN], "0");
     cr_assert_str_eq(infos[0][F_TIME], "Jan  5 18:56");
     cr_assert_eq(infos[1], NULL);
 }

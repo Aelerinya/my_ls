@@ -50,7 +50,7 @@ int display_directory(char *dir_path, int header, char *options)
 int display_all_files(file_t *files, char *options, int no_total)
 {
     char ***infos = NULL;
-    int max[6] = {0};
+    int max[INFO_SIZE] = {0};
 
     if (!options['l']) {
         for (int i = 0; files[i].name != NULL; i++) {
@@ -62,7 +62,7 @@ int display_all_files(file_t *files, char *options, int no_total)
     if ((infos = get_all_file_infos(files, no_total)) == NULL)
         return (1);
     for (int i = 0; files[i].name != NULL; i++)
-        for (int j = 0; j < 6; j++)
+        for (int j = 0; j < INFO_SIZE; j++)
             if (my_strlen(infos[i][j]) > max[j])
                 max[j] = my_strlen(infos[i][j]);
     for (int i = 0; files[i].name != NULL; i++)
@@ -74,14 +74,16 @@ void display_file_list(file_t *file, char **info, int *max)
 {
     int padding;
 
-    for (int j = 0; j < 6; j++) {
+    for (int j = 0; j < INFO_SIZE; j++) {
         padding = max[j] - my_strlen(info[j]);
-        for (int i = 0; i < padding && (j == F_LINK || j == F_SIZE); i++)
+        for (int i = 0; i < padding &&
+        (j == F_LINK || j == F_SIZE_MIN || j == F_MAJ); i++)
             my_putstr(" ");
         my_putstr(info[j]);
         for (int i = 0; i < padding && (j == F_OWNER || j == F_GROUP); i++)
             my_putstr(" ");
-        my_putstr(" ");
+        if (max[j] != 0)
+            my_putstr(" ");
     }
     my_putstr(file->name);
     my_putstr(file->link);

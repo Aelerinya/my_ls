@@ -31,3 +31,17 @@ Test(get_executable_bit, normal)
     stats.st_mode = S_ISVTX;
     cr_assert_eq(get_executable_bit(&file, S_IXOTH), 'T');
 }
+
+Test(get_major_minor_size, all)
+{
+    char *list[3] = {"/dev/urandom", "./tests/test_dir2/one", NULL};
+    file_t *files = convert_file_list(NULL, list);
+    char *info[7];
+
+    get_major_minor_size(files + 0, info);
+    cr_assert_str_eq(info[F_MAJ], "1,");
+    cr_assert_str_eq(info[F_SIZE_MIN], "9");
+    get_major_minor_size(files + 1, info);
+    cr_assert_str_eq(info[F_MAJ], "");
+    cr_assert_str_eq(info[F_SIZE_MIN], "0");
+}

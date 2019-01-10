@@ -73,7 +73,7 @@ char **get_file_info(file_t *file, long *total)
 {
     struct passwd *pass = getpwuid(file->stat->st_uid);
     struct group *grp = getgrgid(file->stat->st_gid);
-    char **info = malloc(sizeof(char *) * 6);
+    char **info = malloc(sizeof(char *) * 8);
 
     if (info == NULL)
         return memory_error();
@@ -81,7 +81,7 @@ char **get_file_info(file_t *file, long *total)
     info[F_LINK] = my_nbr_to_str(file->stat->st_nlink);
     info[F_OWNER] = my_strdup((pass) ? pass->pw_name : "?");
     info[F_GROUP] = my_strdup((grp) ? grp->gr_name : "?");
-    info[F_SIZE] = my_nbr_to_str(file->stat->st_size);
+    get_major_minor_size(file, info);
     info[F_TIME] = get_time(file);
     *total += file->stat->st_blocks;
     return info;

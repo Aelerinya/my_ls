@@ -61,8 +61,9 @@ char *get_time(file_t *file);
 char **get_file_info(file_t *file, long *total);
 char ***get_all_file_infos(file_t *file, int no_total);
 
-//get_executable_bit.c
+// get_other_file_infos.c
 char get_executable_bit(file_t *file, int mask);
+void get_major_minor_size(file_t *file, char **info);
 
 // filepath.c
 char *get_filepath(char *directory, char *file);
