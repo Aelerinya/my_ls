@@ -76,12 +76,13 @@ void display_file_list(file_t *file, char **info, int *max)
 
     for (int j = 0; j < INFO_SIZE; j++) {
         padding = max[j] - my_strlen(info[j]);
-        for (int i = 0; i < padding &&
-        (j == F_LINK || j == F_SIZE_MIN || j == F_MAJ); i++)
-            my_putstr(" ");
+        if (j == F_LINK || j == F_SIZE_MIN || j == F_MAJ)
+            for (int i = 0; i < padding; i++)
+                my_putstr(" ");
         my_putstr(info[j]);
-        for (int i = 0; i < padding && (j == F_OWNER || j == F_GROUP); i++)
-            my_putstr(" ");
+        if (j == F_OWNER || j == F_GROUP)
+            for (int i = 0; i < padding; i++)
+                my_putstr(" ");
         if (max[j] != 0)
             my_putstr(" ");
     }
