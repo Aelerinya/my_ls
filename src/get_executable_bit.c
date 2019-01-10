@@ -15,9 +15,11 @@ char get_executable_bit(file_t *file, int mask)
     int set_group_id = mode & S_ISGID;
     int sticky = mode & S_ISVTX;
 
-    if (set_user_id || set_group_id)
+    if (mask == S_IXUSR && set_user_id)
         return (executable) ? 's' : 'S';
-    if (sticky)
+    if (mask == S_IXGRP && set_group_id)
+        return (executable) ? 's' : 'S';
+    if (mask == S_IXOTH && sticky)
         return (executable) ? 't' : 'T';
     return (executable) ? 'x' : '-';
 }

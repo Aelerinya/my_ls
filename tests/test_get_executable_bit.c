@@ -18,12 +18,16 @@ Test(get_executable_bit, normal)
     cr_assert_eq(get_executable_bit(&file, S_IXUSR), '-');
     stats.st_mode = S_IXUSR;
     cr_assert_eq(get_executable_bit(&file, S_IXUSR), 'x');
-    stats.st_mode = S_ISVTX;
-    cr_assert_eq(get_executable_bit(&file, S_IXUSR), 'T');
-    stats.st_mode = S_ISVTX | S_IXUSR;
-    cr_assert_eq(get_executable_bit(&file, S_IXUSR), 't');
+    stats.st_mode = S_IXUSR | S_ISUID;
+    cr_assert_eq(get_executable_bit(&file, S_IXUSR), 's');
     stats.st_mode = S_ISUID;
     cr_assert_eq(get_executable_bit(&file, S_IXUSR), 'S');
-    stats.st_mode = S_ISGID | S_IXUSR;
-    cr_assert_eq(get_executable_bit(&file, S_IXUSR), 's');
+    stats.st_mode = S_IXGRP | S_ISGID;
+    cr_assert_eq(get_executable_bit(&file, S_IXGRP), 's');
+    stats.st_mode = S_ISGID;
+    cr_assert_eq(get_executable_bit(&file, S_IXGRP), 'S');
+    stats.st_mode = S_IXOTH | S_ISVTX;
+    cr_assert_eq(get_executable_bit(&file, S_IXOTH), 't');
+    stats.st_mode = S_ISVTX;
+    cr_assert_eq(get_executable_bit(&file, S_IXOTH), 'T');
 }
