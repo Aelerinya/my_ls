@@ -92,18 +92,20 @@ char ***get_all_file_infos(file_t *files, int no_total)
     char ***infos;
     int len;
     long total = 0;
+    char *total_str;
 
     for (len = 0; files[len].name != NULL; len++);
     if ((infos = malloc(sizeof(char **) * (len + 1))) == NULL)
         return memory_error();
     infos[len] = NULL;
-    for (int i = 0; i < len; i++) {
+    for (int i = 0; i < len; i++)
         if ((infos[i] = get_file_info(files + i, &total)) == NULL)
             return NULL;
-    }
     if (!no_total) {
         my_putstr("total ");
-        my_putstr(my_nbr_to_str(total / 2));
+        total_str = my_nbr_to_str(total / 2);
+        my_putstr(total_str);
+        free(total_str);
         my_putstr("\n");
     }
     return infos;

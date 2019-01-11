@@ -21,6 +21,8 @@ file_t *files, int header, char *options)
             path = get_filepath(parent_path, files[i].name);
             if (display_directory(path, header, options))
                 return (1);
+            if (parent_path != NULL)
+                free(path);
         }
     }
     return (0);
@@ -44,6 +46,8 @@ int display_directory(char *dir_path, int header, char *options)
         return (1);
     if (options['R'])
         display_all_directories(dir_path, files, 2, options);
+    free(list);
+    destroy_file_list(files);
     return (0);
 }
 
@@ -67,6 +71,7 @@ int display_all_files(file_t *files, char *options, int no_total)
                 max[j] = my_strlen(infos[i][j]);
     for (int i = 0; files[i].name != NULL; i++)
         display_file_list(files + i, infos[i], max);
+    destroy_file_infos(infos);
     return (0);
 }
 

@@ -75,4 +75,8 @@ char **parse_arguments(int ac, char **av);
 void *my_raise(char *error, char *file);
 void *memory_error(void);
 
+// destroy.c
+void destroy_file_list(file_t *files);
+void destroy_file_infos(char ***infos);
+
 #endif

@@ -21,7 +21,8 @@ SRC = 	src/options.c \
 	src/timesort.c \
 	src/get_file_info.c \
 	src/my_nbr_to_str.c \
-	src/get_other_file_infos.c
+	src/get_other_file_infos.c \
+	src/destroy.c
 OBJ = $(notdir $(MAIN:.c=.o)) $(notdir $(SRC:.c=.o))
 
 TESTS =	tests/test_options.c \
