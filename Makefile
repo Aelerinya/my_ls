@@ -47,6 +47,7 @@ I_PATH = include/
 FLAGS = -Wall -Wextra
 
 NAME = my_ls
+BONUS = our_ls
 
 all: $(NAME)
 
@@ -63,6 +64,10 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+bonus:
+	gcc -D BONUS -c $(MAIN) $(SRC) $(FLAGS) -I$(I_PATH)
+	gcc -o $(BONUS) $(OBJ) $(FLAGS)
 
 tests_run:
 	@gcc -c $(TESTS) $(SRC) -I$(I_PATH) $(FLAGS) --coverage

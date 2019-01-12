@@ -5,4 +5,8 @@
 ** List of valid options
 */
 
+#ifdef BONUS
 const char *valid_options = "lRdrt";
+#else
+const char *valid_options = "lRdrt";
+#endif
